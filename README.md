@@ -89,3 +89,31 @@ const App = () => {
     .build();
 ...
 ```
+
+### Prototype Pattern
+Prototype Pattern involves creating new objects by copying an existing object, known as the prototype. It's useful when the cost of creating an object is more expensive or complex than copying an existing one. In React along with JSX, prototype pattern is demonstrated in JSX creation of object in markup.
+
+```javascript
+const TimerPrototype = (props) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prevCount) => prevCount + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div>
+      <p>{props.label}: {count} seconds</p>
+    </div>
+  );
+};
+
+// Clone the prototype to create a new component
+const Timer1 = (props) => <TimerPrototype label={props.label} />;
+const Timer2 = (props) => <TimerPrototype label={props.label} />;
+```
+
